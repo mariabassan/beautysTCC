@@ -1,0 +1,19 @@
+version: '3.2'
+
+services:
+
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: projeto
+      MONGO_INITDB_ROOT_PASSWORD: projeto123
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: projeto
+      ME_CONFIG_MONGODB_ADMINPASSWORD: projeto123
