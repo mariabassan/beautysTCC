@@ -32,22 +32,19 @@ class Establishment {
   endereco: string;
 
   @Column()
-  numero: number;
-
-  @Column()
   cidade: string;
 
   @Column()
   uf: string;
-
-  @Column()
-  ramo: string;
 
   @CreateDateColumn()
   created_at: Date;
 
   @UpdateDateColumn()
   updated_at: Date;
+
+  @Column()
+  favorite: Boolean;
 }
 
 export default Establishment;

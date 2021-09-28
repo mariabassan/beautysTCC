@@ -12,10 +12,9 @@ export default class EstablishmentController {
             phone,
             cep,
             endereco,
-            numero,
             cidade,
             uf,
-            ramo} = req.body;
+            favorite} = req.body;
 
     const createEstablishment = container.resolve(CreateEstablishmentService);
 
@@ -25,10 +24,9 @@ export default class EstablishmentController {
                                                               phone,
                                                               cep,
                                                               endereco,
-                                                              numero,
                                                               cidade,
                                                               uf,
-                                                              ramo });
+                                                              favorite });
 
     return res.json(classToClass(establishment));
   }

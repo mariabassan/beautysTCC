@@ -20,10 +20,9 @@ interface IRequest {
   phone: string;
   cep: string;
   endereco: string;
-  numero: number;
   cidade: string;
   uf: string;
-  ramo: string;
+  favorite: boolean;
   //token: string;
 }
 
@@ -46,7 +45,7 @@ class CreateEstablishmentService {
     private userTokensRepository: IUserTokensRepository,*/
   ) {}
 
-  async execute({cnpj, nomeFantasia, razaoSocial,phone,cep,endereco,numero,cidade,uf,ramo}: IRequest): Promise<Establishment> {
+  async execute({cnpj, nomeFantasia, razaoSocial,phone,cep,endereco,cidade,uf,favorite}: IRequest): Promise<Establishment> {
 
     /*const userToken = await this.userTokensRepository.findByToken(token);
 
@@ -69,7 +68,7 @@ class CreateEstablishmentService {
     }*/
 
     const establishment = await this.establishmentRepository.create({
-      cnpj, nomeFantasia,razaoSocial,phone,cep,endereco,numero,cidade,uf,ramo
+      cnpj, nomeFantasia,razaoSocial,phone,cep,endereco,cidade,uf,favorite
     });
 
     await this.cacheProvider.invalidatePrefix('providers-list');

@@ -5,8 +5,7 @@ export default interface ICreateEstablishmentDTO {
   phone: string;
   cep: string;
   endereco: string;
-  numero: number;
   cidade: string;
   uf: string;
-  ramo: string;
+  favorite: boolean;
 }  
