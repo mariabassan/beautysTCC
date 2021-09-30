@@ -9,7 +9,7 @@ import { Exclude, Expose } from 'class-transformer';
 
 import uploadConfig from '@config/upload';
 
-@Entity('usersAdmin')
+@Entity('users')
 class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
