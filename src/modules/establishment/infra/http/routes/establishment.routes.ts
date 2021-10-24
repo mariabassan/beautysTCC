@@ -3,7 +3,6 @@ import { celebrate, Segments, Joi } from 'celebrate';
 
 import EstablishmentController from '../controllers/EstablishmentController';
 import ListEstablishmentController from '../controllers/ListEstablishmentController';
-//import ProviderAppointmentsController from '@modules/appointments/infra/http/controllers/ProviderAppointmentsController';
 
 //import ensureAuthenticade from '@modules/users/infra/http/middlewares/ensureAuthenticated';
 

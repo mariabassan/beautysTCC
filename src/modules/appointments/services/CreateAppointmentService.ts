@@ -13,6 +13,7 @@ import INotificationsRepository from '@modules/notifications/repositories/INotif
 interface IRequest {
   cooperator_id: string;
   user_id: string;
+  procedure_id: string;
   date: Date;
 }
 
@@ -32,6 +33,7 @@ class CreateAppointmentService {
   public async execute({
     date,
     cooperator_id,
+    procedure_id,
     user_id,
   }: IRequest): Promise<Appointment> {
     const appointmentDate = startOfHour(date);
@@ -64,14 +66,15 @@ class CreateAppointmentService {
     const appointment = await this.appointmentsRepository.create({
       user_id,
       cooperator_id,
+      procedure_id,
       date: appointmentDate,
     });
 
     const dateFormated = format(appointmentDate, "dd/MM/yyyy 'às' HH:mm'h'");
 
     await this.notificationsRepository.create({
-      recipient_id: cooperator_id,
-      content: `Novo agendamento para o dia ${dateFormated}.`,
+      recipient_id: user_id,
+      content: `Novo agendamento com o ${cooperator_id} para o dia ${dateFormated}.`,
     });
 
     await this.cacheProvider.invalidate(

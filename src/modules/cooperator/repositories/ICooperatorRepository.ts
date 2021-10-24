@@ -5,6 +5,7 @@ import IFindAllCooperatorEstabDTO from '@modules/cooperator/dtos/IFindAllCoopera
 
 export default interface ICooperatorRepository {
   findAllCooperator(data: IFindAllCooperatorDTO): Promise<Cooperator[]>;
+  findByIdCoop(id: string): Promise<Cooperator | undefined>;
   findByEmail(email: string): Promise<Cooperator | undefined>;
   findByEstab(estab_cnpj: IFindAllCooperatorEstabDTO): Promise<Cooperator[]>;
   create(data: ICreateCooperatorDTO): Promise<Cooperator>;

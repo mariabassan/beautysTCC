@@ -6,13 +6,14 @@ import CreateAppointmentService from '../../../services/CreateAppointmentService
 export default class AppointmentsController {
   public async create(req: any, res: Response): Promise<Response> {
     const user_id = req.user.id;
-    const { cooperator_id, date } = req.body;
+    const { cooperator_id, procedure_id, date } = req.body;
 
     const createAppointment = container.resolve(CreateAppointmentService);
 
     const appointment = await createAppointment.execute({
       cooperator_id,
       date,
+      procedure_id,
       user_id,
     });
 

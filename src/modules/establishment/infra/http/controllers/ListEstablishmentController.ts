@@ -8,7 +8,7 @@ import Establishment from '../../typeorm/entities/Establishment';
 
 export default class ListEstablishmentController {
   public async index(req: any, res: Response): Promise<Response> {
-    const establishment_id = req.user.id;
+    const establishment_id = req.establishment.id;
 
     const listEstablishment = container.resolve(ListEstablishmentService);
 

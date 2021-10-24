@@ -9,6 +9,8 @@ import {
 } from 'typeorm';
 
 import User from '../../../../users/infra/typeorm/entities/User';
+import Cooperator from '../../../../cooperator/infra/typeorm/entities/Cooperator';
+import Procedure from '../../../../procedure/infra/typeorm/entities/Procedure';
 
 @Entity('appointments')
 class Appointment {
@@ -18,9 +20,9 @@ class Appointment {
   @Column()
   cooperator_id: string;
 
-  @ManyToOne(() => User)
+  @ManyToOne(() => Cooperator)
   @JoinColumn({ name: 'cooperator_id' })
-  provider: User;
+  provider: Cooperator;
 
   @Column()
   user_id: string;
@@ -37,6 +39,13 @@ class Appointment {
 
   @UpdateDateColumn()
   updated_at: Date;
+
+  @Column()
+  procedure_id: string;
+
+  @ManyToOne(() => Procedure)
+  @JoinColumn({ name: 'procedure_id' })
+  procedure: Procedure;
 }
 
 export default Appointment;
