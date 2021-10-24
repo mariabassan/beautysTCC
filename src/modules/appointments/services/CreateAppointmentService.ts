@@ -31,10 +31,10 @@ class CreateAppointmentService {
   ) {}
 
   public async execute({
-    date,
     cooperator_id,
-    procedure_id,
     user_id,
+    procedure_id,
+    date,
   }: IRequest): Promise<Appointment> {
     const appointmentDate = startOfHour(date);
 
@@ -46,9 +46,9 @@ class CreateAppointmentService {
       throw new AppError("Não é permitido criar um agendamento para você mesmo.");
     }
 
-    if (getHours(appointmentDate) < 8 || getHours(appointmentDate) > 17) {
+    if (getHours(appointmentDate) < 8 || getHours(appointmentDate) > 18) {
       throw new AppError(
-        'Os agendamentos só podem ser feitos entre 8am e 5pm.',
+        'Os agendamentos só podem ser feitos entre 8am e 6pm.',
       );
     }
 
@@ -64,8 +64,8 @@ class CreateAppointmentService {
     }
 
     const appointment = await this.appointmentsRepository.create({
-      user_id,
       cooperator_id,
+      user_id,
       procedure_id,
       date: appointmentDate,
     });

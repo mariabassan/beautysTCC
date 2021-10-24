@@ -19,7 +19,7 @@ class Establishment {
   @Column()
   nomeFantasia: string;
 
-  @CreateDateColumn()
+  @Column()
   razaoSocial: string;
 
   @Column()

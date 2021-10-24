@@ -5,7 +5,7 @@ import ListProviderAppointmentsService from '../../../services/ListProviderAppoi
 
 export default class ProviderAppointmentsController {
   public async index(req: any, res: Response): Promise<Response> {
-    const cooperator_id = req.user.id;
+    const cooperator_id = req.cooperator.id;
     const { day, month, year } = req.query;
 
     const listProviderAppointments = container.resolve(
