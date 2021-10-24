@@ -8,7 +8,7 @@ import ListEstablishmentController from '../controllers/ListEstablishmentControl
 
 const establishmentRouter = Router();
 const establishmentController = new EstablishmentController();
-const listestablishmentController = new ListEstablishmentController();
+const listEstablishmentController = new ListEstablishmentController();
 
 //establishmentRouter.use(ensureAuthenticade);
 
@@ -29,6 +29,6 @@ establishmentRouter.post(
   }),
   establishmentController.create,
 );
-establishmentRouter.get('/me', listestablishmentController.index);
+establishmentRouter.get('/', listEstablishmentController.index);
 
 export default establishmentRouter;

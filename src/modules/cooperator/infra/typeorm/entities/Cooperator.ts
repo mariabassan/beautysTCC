@@ -8,8 +8,8 @@ import {
   JoinColumn,
 } from 'typeorm';
 import { Exclude, Expose } from 'class-transformer';
-import Establishment from '@modules/establishment/infra/typeorm/entities/Establishment';
-import Procedures from '@modules/procedure/infra/typeorm/entities/Procedure';
+//import Establishment from '@modules/establishment/infra/typeorm/entities/Establishment';
+//import Procedures from '@modules/procedure/infra/typeorm/entities/Procedure';
 
 @Entity('cooperator')
 class Cooperator {

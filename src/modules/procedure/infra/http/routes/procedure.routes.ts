@@ -9,7 +9,7 @@ import ListProcedureController from '../controllers/ListProcedureController';
 
 const procedureRouter = Router();
 const procedureController = new ProcedureController();
-const listprocedureController = new ListProcedureController();
+const listProcedureController = new ListProcedureController();
 
 //procedureRouter.use(ensureAuthenticade);
 
@@ -18,12 +18,11 @@ procedureRouter.post(
   celebrate({
     [Segments.BODY]: {
       name: Joi.string().required(),
-      valor: Joi.string().required(),
-      duracao: Joi.string().required(),
+      price: Joi.string().required(),
     },
   }),
   procedureController.create,
 );
-procedureRouter.get('/me', listprocedureController.index);
+procedureRouter.get('/', listProcedureController.index);
 
 export default procedureRouter;

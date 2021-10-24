@@ -1,4 +1,4 @@
 export default interface IFindAllProcedureDTO {
-  id: string;
-  name?: string;
+  procedure_id: string;
+  //name?: string;
 }

@@ -10,8 +10,7 @@ import Procedure from '@modules/procedure/infra/typeorm/entities/Procedure';
 
 interface IRequest {
   name: string;
-  valor: string;
-  duracao: string;
+  price: string;
 }
 
 @injectable()
@@ -27,7 +26,7 @@ class CreateProcedureService {
     private cacheProvider: ICacheProvider,
   ) {}
 
-  async execute({ name, valor, duracao }: IRequest): Promise<Procedure> {
+  async execute({ name, price}: IRequest): Promise<Procedure> {
     /*const checkProcedureExists = await this.proceduresRepository.findByName(name);
 
     if (checkProcedureExists) {
@@ -36,8 +35,7 @@ class CreateProcedureService {
 
     const procedure = await this.procedureRepository.create({
       name,
-      valor,
-      duracao,
+      price
     });
 
     await this.cacheProvider.invalidatePrefix('providers-list');

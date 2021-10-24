@@ -15,10 +15,7 @@ class Procedure {
   name: string;
 
   @Column()
-  valor: string;
-
-  @CreateDateColumn()
-  duracao: Date;
+  price: string;
 
   @CreateDateColumn()
   created_at: Date;

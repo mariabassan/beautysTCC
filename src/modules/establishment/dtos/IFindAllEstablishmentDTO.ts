@@ -1,4 +1,4 @@
 export default interface IFindAllEstablishmentDTO {
-  id: string;
-  nomeFantasia?: string;
+  establishment_id: string;
+  //nomeFantasia?: string;
 }

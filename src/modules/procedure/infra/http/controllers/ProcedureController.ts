@@ -6,11 +6,11 @@ import CreateProcedureService from '../../../services/CreateProcedureService';
 
 export default class ProcedureController {
   public async create(req: Request, res: Response): Promise<Response> {
-    const { name, valor, duracao } = req.body;
+    const { name, price } = req.body;
 
     const createProcedure = container.resolve(CreateProcedureService);
 
-    const procedure = await createProcedure.execute({ name, valor, duracao });
+    const procedure = await createProcedure.execute({ name, price });
 
     return res.json(classToClass(procedure));
   }

@@ -8,7 +8,7 @@ import Procedure from '../../typeorm/entities/Procedure';
 
 export default class ListProcedureController {
   public async index(req: any, res: Response): Promise<Response> {
-    const procedure_id = req.user.id;
+    const {procedure_id} = req.params;
 
     const listProcedure = container.resolve(ListProcedureService);
 

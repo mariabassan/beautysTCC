@@ -14,26 +14,19 @@ class ListProcedureService {
   constructor(
     @inject('ProcedureRepository')
     private procedureRepository: IProcedureRepository,
-
-    @inject('CacheProvider')
-    private cacheProvider: ICacheProvider,
   ) {}
 
-  public async execute({ procedure_id }: IRequest): Promise<Procedure[]> {
-    let procedures = await this.cacheProvider.recover<Procedure[]>(
-      `providers-list:${procedure_id}`,
-    );
+public async execute({
+  procedure_id,
+}: IRequest): Promise<Procedure[]> {
+  const procedures = await this.procedureRepository.findAllProcedure(
+    {
+      procedure_id,
+    },
+  );
 
-    if (!procedures) {
-      procedures = await this.procedureRepository.findAllProcedure({
-        id: procedure_id,
-      });
-
-      await this.cacheProvider.save(`providers-list:${procedure_id}`, procedures);
-    }
-
-    return procedures;
-  }
+  return procedures;
+}
 }
 
 export default ListProcedureService;

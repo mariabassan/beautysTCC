@@ -19,12 +19,8 @@ export default class CreateProcedures1621061855858 implements MigrationInterface
             isUnique: true,
           },
           {
-            name: 'valor',
+            name: 'price',
             type: 'varchar',
-          },
-          {
-            name: 'duracao',
-            type: 'time',
           },
           {
             name: 'created_at',

@@ -1,4 +1,4 @@
-import { getRepository, Repository} from 'typeorm';
+import { getRepository, Repository, Not} from 'typeorm';
 
 import ICreateProcedureDTO from '../../../dtos/ICreateProcedureDTO';
 import IFindAllProcedureDTO from '../../../dtos/IFindAllProcedureDTO';
@@ -13,32 +13,48 @@ class ProcedureRepository implements IProcedureRepository {
   constructor() {
     this.ormRepository = getRepository(Procedure);
   }
-  findAllProcedure(data: IFindAllProcedureDTO): Promise<Procedure[]> {
+  /*findAllProcedure(data: IFindAllProcedureDTO): Promise<Procedure[]> {
     throw new Error('Method not implemented.');
+  }*/
+
+  public async findAllProcedure({
+    procedure_id,
+  }: IFindAllProcedureDTO): Promise<Procedure[]> {
+    let procedure: Procedure[];
+
+    if (procedure_id) {
+      procedure = await this.ormRepository.find({
+        where: {
+          id: Not(procedure_id),
+        },
+      });
+    } else {
+      procedure = await this.ormRepository.find();
+    }
+
+    return procedure;
   }
+
   save(name: Procedure): Promise<Procedure> {
     throw new Error('Method not implemented.');
   }
 
   public async findByName({
-    id,
-    name,
+    procedure_id,
   }: IFindAllProcedureDTO): Promise<Procedure | undefined> {
     const findProcedure = await this.ormRepository.findOne({
-      where: { id, name },
+      where: { procedure_id },
     });
     return findProcedure;
   }
 
   public async create({
     name,
-    valor,
-    duracao
+    price,
   }: ICreateProcedureDTO): Promise<Procedure> {
     const Procedure = this.ormRepository.create({
       name,
-      valor,
-      duracao
+      price
     });
 
     await this.ormRepository.save(Procedure);

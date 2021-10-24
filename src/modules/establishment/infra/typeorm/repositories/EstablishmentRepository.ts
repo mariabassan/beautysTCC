@@ -1,4 +1,4 @@
-import { getRepository, Repository} from 'typeorm';
+import { getRepository, Repository, Not} from 'typeorm';
 
 import ICreateEstablishmentDTO from '../../../dtos/ICreateEstablishmentDTO';
 import IFindAllEstablishmentDTO from '../../../dtos/IFindAllEstablishmentDTO';
@@ -17,19 +17,38 @@ class EstablishmentRepository implements IEstablishmentRepository {
   /*findByCNPJ(cnpj: string): Promise<Establishment | undefined> {
     throw new Error('Method not implemented.');
   }*/
-  findAllEstablishment(data: IFindAllEstablishmentDTO): Promise<Establishment[]> {
-    throw new Error('Method not implemented.');
+
+  public async findAllEstablishment({
+    establishment_id,
+  }: IFindAllEstablishmentDTO): Promise<Establishment[]> {
+    let establishment: Establishment[];
+
+    if (establishment_id) {
+      establishment = await this.ormRepository.find({
+        where: {
+          id: Not(establishment_id),
+        },
+      });
+    } else {
+      establishment = await this.ormRepository.find();
+    }
+
+    return establishment;
   }
+
+  /*findAllEstablishment(data: IFindAllEstablishmentDTO): Promise<Establishment[]> {
+    throw new Error('Method not implemented.');
+  }*/
+
   save(name: Establishment): Promise<Establishment> {
     throw new Error('Method not implemented.');
   }
 
   public async findByName({
-    id,
-    nomeFantasia,
+    establishment_id,
   }: IFindAllEstablishmentDTO): Promise<Establishment | undefined> {
     const findEstablishment = await this.ormRepository.findOne({
-      where: { id, nomeFantasia },
+      where: { establishment_id },
     });
     return findEstablishment;
   }
@@ -41,10 +60,9 @@ class EstablishmentRepository implements IEstablishmentRepository {
     phone,
     cep,
     endereco,
-    numero,
     cidade,
     uf,
-    ramo
+    favorite
   }: ICreateEstablishmentDTO): Promise<Establishment> {
     const Establishment = this.ormRepository.create({
       cnpj,
@@ -53,10 +71,9 @@ class EstablishmentRepository implements IEstablishmentRepository {
       phone,
       cep,
       endereco,
-      numero,
       cidade,
       uf,
-      ramo,
+      favorite,
     });
 
     await this.ormRepository.save(Establishment);

@@ -37,29 +37,10 @@ class CreateEstablishmentService {
 
     @inject('CacheProvider')
     private cacheProvider: ICacheProvider,
-
-   /* @inject('UsersRepository')
-    private usersRepository: IUsersRepository,
-
-    @inject('UserTokensRepository')
-    private userTokensRepository: IUserTokensRepository,*/
   ) {}
 
   async execute({cnpj, nomeFantasia, razaoSocial,phone,cep,endereco,cidade,uf,favorite}: IRequest): Promise<Establishment> {
 
-    /*const userToken = await this.userTokensRepository.findByToken(token);
-
-    if (!userToken) {
-      throw new AppError('User token não existe');
-    }
-
-
-    const tokenCraetedAt = userToken.created_at;
-    const compareDate = addHours(tokenCraetedAt, 2);
-
-    if (isAfter(Date.now(), compareDate)) {
-      throw new AppError('Token expirado');
-    }*/
 
     /*const checkEstablishmentExists = await this.establishmentRepository.findByCNPJ(cnpj);
 

@@ -20,19 +20,19 @@ class CooperatorRepository {
   public async findAllCooperator({
     cooperator_id,
   }: IFindAllCooperatorDTO): Promise<Cooperator[]> {
-    let users: Cooperator[];
+    let cooperator: Cooperator[];
 
     if (cooperator_id) {
-      users = await this.ormRepository.find({
+      cooperator = await this.ormRepository.find({
         where: {
           id: Not(cooperator_id),
         },
       });
     } else {
-      users = await this.ormRepository.find();
+      cooperator = await this.ormRepository.find();
     }
 
-    return users;
+    return cooperator;
   }
 
   save(name: Cooperator): Promise<Cooperator> {
