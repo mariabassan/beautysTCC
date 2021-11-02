@@ -2,6 +2,7 @@ import { getRepository, Repository, Not} from 'typeorm';
 
 import ICreateCooperatorDTO from '../../../dtos/ICreateCooperatorDTO';
 import IFindAllCooperatorDTO from '../../../dtos/IFindAllCooperatorDTO';
+import IFindAllCooperatorEstabDTO from '../../../dtos/IFindAllCooperatorEstabDTO';
 
 //import IEstablishmentRepository from '@modules/establishment/repositories/IEstablishmentRepository';
 // import ICooperatorRepository from '@modules/cooperator/infra/typeorm/repositories/CooperatorRepository';
@@ -35,11 +36,30 @@ class CooperatorRepository {
     return cooperator;
   }
 
+  public async findAllCooperatorEstab({
+    cooperator_id,
+    estab_id
+  }: IFindAllCooperatorEstabDTO): Promise<Cooperator[]> {
+    let cooperators: Cooperator[];
+
+    if (cooperator_id) {
+      cooperators = await this.ormRepository.find({
+        where: {
+          estab: (estab_id),
+        },
+      });
+    } else {
+      cooperators = await this.ormRepository.find();
+    }
+
+    return cooperators;
+  }
+
   save(name: Cooperator): Promise<Cooperator> {
     throw new Error('Method not implemented.');
   }
 
-  public async findByName({
+  public async findByIdCoop({
     cooperator_id
   }: IFindAllCooperatorDTO): Promise<Cooperator | undefined> {
     const findCooperator = await this.ormRepository.findOne({

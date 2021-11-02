@@ -4,15 +4,13 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
-  ManyToOne,
-  JoinColumn,
 } from 'typeorm';
 import { Exclude, Expose } from 'class-transformer';
-import Establishment from '@modules/establishment/infra/typeorm/entities/Establishment';
-//import Procedures from '@modules/procedure/infra/typeorm/entities/Procedure';
 
-@Entity('cooperator')
-class Cooperator {
+import uploadConfig from '@config/upload';
+
+@Entity('user_client')
+class User_client {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -27,12 +25,6 @@ class Cooperator {
   password: string;
 
   @Column()
-  phone: string;
-
-  @Column()
-  procedure: string;
-
-  @Column()
   avatar: string;
 
   @CreateDateColumn()
@@ -41,17 +33,11 @@ class Cooperator {
   @UpdateDateColumn()
   updated_at: Date;
 
-  @Column()
-  estab_id: string;
-
-  @ManyToOne(() => Establishment)
-  @JoinColumn({ name: 'estab_id' })
-  estab: Establishment;
-
   @Expose({ name: 'avatar_url' })
   getAvatarUrl(): string | null {
     return this.avatar ?`${process.env.APP_API_URL}/files/${this.avatar}`:null;
-  }
-}
 
-export default Cooperator;
+    }
+  }
+
+export default User_client;
