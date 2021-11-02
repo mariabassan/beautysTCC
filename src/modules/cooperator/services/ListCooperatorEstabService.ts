@@ -5,7 +5,7 @@ import Cooperator from '@modules/cooperator/infra/typeorm/entities/Cooperator';
 
 interface IRequest {
   cooperator_id: string;
-  estab_cnpj:string;
+  estab_id:string;
 }
 
 @injectable()
@@ -17,12 +17,12 @@ class ListCooperatorEstabService {
 
   public async execute({
     cooperator_id,
-    estab_cnpj
+    estab_id
   }: IRequest): Promise<Cooperator[]> {
     const cooperator = await this.cooperatorRepository.findByEstab(
       {
         cooperator_id,
-        estab_cnpj
+        estab_id
       },
     );
 
