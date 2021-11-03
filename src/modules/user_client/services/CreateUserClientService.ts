@@ -4,6 +4,7 @@ import AppError from '../../../shared/errors/AppError';
 import ICacheProvider from '../../../shared/container/providers/CacheProvider/models/ICacheProvider';
 import IUsersClientRepository from '../repositories/IUsersClientRepository';
 import IHashProvider from '../providers/HashProvider/models/IHashProvider';
+//import UsersClientRepository from '../infra/typeorm/repositories/UsersClientRepository';
 
 import User_client from '../infra/typeorm/entities/User_client';
 

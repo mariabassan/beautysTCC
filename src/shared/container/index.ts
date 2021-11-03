@@ -27,6 +27,12 @@ import EstablishmentRepository from '../../modules/establishment/infra/typeorm/r
 import IProcedureRepository from '../../modules/procedure/repositories/IProcedureRepository';
 import ProcedureRepository from '../../modules/procedure/infra/typeorm/repositories/ProcedureRepository';
 
+import IUsersClientRepository from '../../modules/user_client/repositories/IUsersClientRepository';
+import UsersClientRepository from '../../modules/user_client/infra/typeorm/repositories/UsersClientRepository';
+
+import IUserTokensClientRepository from '../../modules/user_client/repositories/IUserTokensClientRepository';
+import UserTokensClientRepository from '../../modules/user_client/infra/typeorm/repositories/UserTokensClientRepository';
+
 
 container.registerSingleton<IAppointmentsRepository>(
   'AppointmentsRepository',
@@ -41,6 +47,16 @@ container.registerSingleton<IUsersRepository>(
 container.registerSingleton<IUserTokensRepository>(
   'UserTokensRepository',
   UserTokensRepository,
+);
+
+container.registerSingleton<IUsersClientRepository>(
+  'UsersClientRepository',
+  UsersClientRepository,
+);
+
+container.registerSingleton<IUserTokensClientRepository>(
+  'UserTokensClientRepository',
+  UserTokensClientRepository,
 );
 
 container.registerSingleton<INotificationsRepository>(
@@ -62,8 +78,3 @@ container.registerSingleton<IEstablishmentRepository>(
   'EstablishmentRepository',
   EstablishmentRepository,
 );
-
-/*container.registerSingleton<IEstablishmentTokensRepository>(
-  'EstablishmentTokensRepository',
-  EstablishmentTokensRepository,
-);*/

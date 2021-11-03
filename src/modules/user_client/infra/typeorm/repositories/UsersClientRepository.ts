@@ -2,6 +2,7 @@ import { getRepository, Repository, Not } from 'typeorm';
 
 import IUsersClientRepository from '../../../repositories/IUsersClientRepository';
 import ICreateUserClientDTO from '../../../dtos/ICreateUserClientDTO';
+import IFindAllProvidersClientDTO from '../../../dtos/IFindAllProvidersClientDTO';
 import User_client from '../entities/User_client';
 
 class UsersClientRepository implements IUsersClientRepository {
@@ -21,6 +22,24 @@ class UsersClientRepository implements IUsersClientRepository {
     const user_client = await this.ormRepository.findOne({ where: { email } });
 
     return user_client;
+  }
+
+  public async findAllProviders({
+    execept_user_id,
+  }: IFindAllProvidersClientDTO): Promise<User_client[]> {
+    let users_client: User_client[];
+
+    if (execept_user_id) {
+      users_client = await this.ormRepository.find({
+        where: {
+          id: Not(execept_user_id),
+        },
+      });
+    } else {
+      users_client = await this.ormRepository.find();
+    }
+
+    return users_client;
   }
 
   public async create({

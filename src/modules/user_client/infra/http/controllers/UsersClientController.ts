@@ -8,9 +8,9 @@ export default class UsersClientController {
   public async create(req: Request, res: Response): Promise<Response> {
     const { name, email, password } = req.body;
 
-    const createUser_client = container.resolve(CreateUserClientService);
+    const createUserClient = container.resolve(CreateUserClientService);
 
-    const user_client = await createUser_client.execute({ name, email, password });
+    const user_client = await createUserClient.execute({ name, email, password });
 
     return res.json(classToClass(user_client));
   }
