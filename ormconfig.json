@@ -19,5 +19,16 @@
     "cli": {
       "migrationsDir": "./src/shared/infra/typeorm/migrations"
     }
+  },
+  {
+    "name": "mongo",
+    "type": "mongodb",
+    "host": "localhost",
+    "port": 27017,
+    "database": "TCCbeautyscheduler",
+    "useUnifiedTopology": true,
+    "entities": [
+      "./src/modules/notifications/infra/typeorm/schemas/Notification.ts"
+    ]
   }
 ]

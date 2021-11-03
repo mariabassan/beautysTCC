@@ -6,8 +6,8 @@ services:
     image: mongo
     restart: always
     environment:
-      MONGO_INITDB_ROOT_USERNAME: projeto
-      MONGO_INITDB_ROOT_PASSWORD: projeto123
+      MONGO_INITDB_ROOT_USERNAME: Duda
+      MONGO_INITDB_ROOT_PASSWORD: M@ri@eduarda
 
   mongo-express:
     image: mongo-express
@@ -15,5 +15,5 @@ services:
     ports:
       - 27017:27017
     environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: projeto
-      ME_CONFIG_MONGODB_ADMINPASSWORD: projeto123
+      ME_CONFIG_MONGODB_ADMINUSERNAME: Duda
+      ME_CONFIG_MONGODB_ADMINPASSWORD: M@ri@eduarda

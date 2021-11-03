@@ -26,7 +26,7 @@ cooperatorsRouter.post(
 cooperatorsRouter.get('/', listCooperatorController.index);
 
 cooperatorsRouter.get(
-  '/cooperator/estab',
+  '/estab',
   celebrate({
     [Segments.PARAMS]: {
       estab_cnpj: Joi.string().required(),
