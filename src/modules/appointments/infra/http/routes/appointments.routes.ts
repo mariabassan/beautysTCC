@@ -17,6 +17,8 @@ appointmentsRouter.post(
   celebrate({
     [Segments.BODY]: {
       cooperator_id: Joi.string().uuid().required(),
+      user_id: Joi.string().uuid().required(),
+      procedure_id: Joi.string().uuid().required(),
       date: Joi.date().required(),
     },
   }),

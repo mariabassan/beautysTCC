@@ -21,9 +21,6 @@ import CooperatorRepository from '../../modules/cooperator/infra/typeorm/reposit
 import IEstablishmentRepository from '../../modules/establishment/repositories/IEstablishmentRepository';
 import EstablishmentRepository from '../../modules/establishment/infra/typeorm/repositories/EstablishmentRepository';
 
-//import IEstablishmentTokensRepository from '@modules/establishment/repositories/IEstablishmentTokensRepository';
-//import EstablishmentTokensRepository from '@modules/establishment/infra/typeorm/repositories/EstablishmentTokensRepository';
-
 import IProcedureRepository from '../../modules/procedure/repositories/IProcedureRepository';
 import ProcedureRepository from '../../modules/procedure/infra/typeorm/repositories/ProcedureRepository';
 
