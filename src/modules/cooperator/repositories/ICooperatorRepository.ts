@@ -1,7 +1,7 @@
-import Cooperator from '@modules/cooperator/infra/typeorm/entities/Cooperator';
-import ICreateCooperatorDTO from '@modules/cooperator/dtos/ICreateCooperatorDTO';
-import IFindAllCooperatorDTO from '@modules/cooperator/dtos/IFindAllCooperatorDTO';
-import IFindAllCooperatorEstabDTO from '@modules/cooperator/dtos/IFindAllCooperatorEstabDTO';
+import Cooperator from '../infra/typeorm/entities/Cooperator';
+import ICreateCooperatorDTO from '../dtos/ICreateCooperatorDTO';
+import IFindAllCooperatorDTO from '../dtos/IFindAllCooperatorDTO';
+import IFindAllCooperatorEstabDTO from '../dtos/IFindAllCooperatorEstabDTO';
 
 export default interface ICooperatorRepository {
   findAllCooperator(data: IFindAllCooperatorDTO): Promise<Cooperator[]>;

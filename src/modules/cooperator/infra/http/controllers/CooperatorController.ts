@@ -6,12 +6,11 @@ import CreateCooperatorService from '../../../services/CreateCooperatorService';
 
 export default class CooperatorsController {
   public async create(req: Request, res: Response): Promise<Response> {
-    const estab_id = req.user.id;
-    const { name, email, password, phone } = req.body;
+    const { name, email, password, phone, estab_id } = req.body;
 
-    const createCooeperator = container.resolve(CreateCooperatorService);
+    const createCooperator = container.resolve(CreateCooperatorService);
 
-    const cooperator = await createCooeperator.execute({ name, email, password, phone, estab_id });
+    const cooperator = await createCooperator.execute({ name, email, password, phone, estab_id });
 
     return res.json(classToClass(cooperator));
   }

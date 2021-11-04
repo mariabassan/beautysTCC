@@ -5,11 +5,11 @@ import IFindAllCooperatorDTO from '../../../dtos/IFindAllCooperatorDTO';
 import IFindAllCooperatorEstabDTO from '../../../dtos/IFindAllCooperatorEstabDTO';
 
 //import IEstablishmentRepository from '@modules/establishment/repositories/IEstablishmentRepository';
-// import ICooperatorRepository from '@modules/cooperator/infra/typeorm/repositories/CooperatorRepository';
+import ICooperatorRepository from '../../../infra/typeorm/repositories/CooperatorRepository';
 
 import Cooperator from '../entities/Cooperator';
 
-class CooperatorRepository {
+class CooperatorRepository implements ICooperatorRepository {
   private ormRepository: Repository<Cooperator>;
 
   constructor() {
@@ -72,13 +72,15 @@ class CooperatorRepository {
     name,
     email, 
     password,
-    phone
+    phone,
+    estab_id
   }: ICreateCooperatorDTO): Promise<Cooperator> {
     const Cooperator = this.ormRepository.create({
       name,
       email, 
       password,
-      phone
+      phone,
+      estab_id
     });
 
     await this.ormRepository.save(Cooperator);

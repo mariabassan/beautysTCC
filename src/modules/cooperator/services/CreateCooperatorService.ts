@@ -1,12 +1,12 @@
 import { injectable, inject } from 'tsyringe';
 
-import AppError from '@shared/errors/AppError';
-import ICacheProvider from '@shared/container/providers/CacheProvider/models/ICacheProvider';
-import IHashProvider from '@modules/users/providers/HashProvider/models/IHashProvider';
+import AppError from '../../../shared/errors/AppError';
+import ICacheProvider from '../../../shared/container/providers/CacheProvider/models/ICacheProvider';
+import IHashProvider from '../../users/providers/HashProvider/models/IHashProvider';
 //import CooperatorRepository from '@modules/cooperator/infra/typeorm/repositories/CooperatorRepository';
-import ICooperatorRepository from '@modules/cooperator/repositories/ICooperatorRepository';
+import ICooperatorRepository from '../repositories/ICooperatorRepository';
 
-import Cooperator from '@modules/cooperator/infra/typeorm/entities/Cooperator';
+import Cooperator from '../infra/typeorm/entities/Cooperator';
 
 interface IRequest {
   name: string;
@@ -29,7 +29,7 @@ class CreateCooperatorService {
     private cacheProvider: ICacheProvider,
   ) {}
 
-  async execute({ name, email, password, phone, estab_id}: IRequest): Promise<Cooperator> {
+  async execute({name, email, password, phone, estab_id}: IRequest): Promise<Cooperator> {
     /*const checkCooperatorExists = await this.cooperatorRepository.findByEmail(email);
 
     if (checkCooperatorExists) {
