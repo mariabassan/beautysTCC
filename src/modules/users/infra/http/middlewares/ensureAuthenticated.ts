@@ -32,6 +32,10 @@ export default function ensureAuthenticated(
       id: sub,
     };
 
+    /*req.cooperator = {
+      id: sub,
+    };*/
+
     return next();
   } catch {
     throw new AppError('Invalid JWT token', 401);
