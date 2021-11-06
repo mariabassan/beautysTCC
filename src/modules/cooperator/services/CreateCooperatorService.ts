@@ -13,6 +13,7 @@ interface IRequest {
   email: string;
   password: string;
   phone: string;
+  procedure_id: string;
   estab_id: string;
 }
 
@@ -29,7 +30,7 @@ class CreateCooperatorService {
     private cacheProvider: ICacheProvider,
   ) {}
 
-  async execute({name, email, password, phone, estab_id}: IRequest): Promise<Cooperator> {
+  async execute({name, email, password, phone, procedure_id, estab_id}: IRequest): Promise<Cooperator> {
     /*const checkCooperatorExists = await this.cooperatorRepository.findByEmail(email);
 
     if (checkCooperatorExists) {
@@ -43,6 +44,7 @@ class CreateCooperatorService {
       email,
       password: hashedPassword,
       phone,
+      procedure_id,
       estab_id,
     });
 

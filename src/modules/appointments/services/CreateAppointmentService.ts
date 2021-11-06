@@ -3,11 +3,11 @@ import { injectable, inject } from 'tsyringe';
 
 import AppError from '../../../shared/errors/AppError';
 
-import Appointment from '@modules/appointments/infra/typeorm/entities/Appointment';
-import IAppoitmentsRepository from '@modules/appointments/repositories/IAppointmentsRepository';
-import ICacheProvider from '@shared/container/providers/CacheProvider/models/ICacheProvider';
+import Appointment from '../infra/typeorm/entities/Appointment';
+import IAppoitmentsRepository from '../repositories/IAppointmentsRepository';
+import ICacheProvider from '../../../shared/container/providers/CacheProvider/models/ICacheProvider';
 
-import INotificationsRepository from '@modules/notifications/repositories/INotificationsRepository';
+import INotificationsRepository from '../../../modules/notifications/repositories/INotificationsRepository';
 
 
 interface IRequest {

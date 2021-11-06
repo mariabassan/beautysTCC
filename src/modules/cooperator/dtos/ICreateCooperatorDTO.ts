@@ -3,5 +3,6 @@ export default interface ICreateCooperatorDTO {
   email: string;
   password: string;
   phone: string;
+  procedure_id: string;
   estab_id: string;
 }

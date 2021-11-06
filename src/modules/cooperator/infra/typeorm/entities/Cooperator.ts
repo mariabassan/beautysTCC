@@ -9,6 +9,7 @@ import {
 } from 'typeorm';
 import { Exclude, Expose } from 'class-transformer';
 import Establishment from '@modules/establishment/infra/typeorm/entities/Establishment';
+import Procedure from '@modules/procedure/infra/typeorm/entities/Procedure';
 //import Procedures from '@modules/procedure/infra/typeorm/entities/Procedure';
 
 @Entity('cooperator')
@@ -30,7 +31,11 @@ class Cooperator {
   phone: string;
 
   @Column()
-  procedure: string;
+  procedure_id: string;
+
+  @ManyToOne(() => Procedure)
+  @JoinColumn({ name: 'procedure_id' })
+  procedure: Procedure;
 
   @Column()
   avatar: string;

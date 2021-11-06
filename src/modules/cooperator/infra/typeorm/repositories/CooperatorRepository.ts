@@ -73,6 +73,7 @@ class CooperatorRepository implements ICooperatorRepository {
     email, 
     password,
     phone,
+    procedure_id,
     estab_id
   }: ICreateCooperatorDTO): Promise<Cooperator> {
     const Cooperator = this.ormRepository.create({
@@ -80,6 +81,7 @@ class CooperatorRepository implements ICooperatorRepository {
       email, 
       password,
       phone,
+      procedure_id,
       estab_id
     });
 

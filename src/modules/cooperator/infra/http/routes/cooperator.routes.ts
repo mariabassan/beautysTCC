@@ -18,6 +18,8 @@ cooperatorsRouter.post(
       email: Joi.string().email().required(),
       password: Joi.string().required(),
       phone: Joi.string().required(),
+      procedure_id: Joi.string().required(),
+      estab_id: Joi.string().required(),
     },
   }),
   cooperatorsController.create,
