@@ -121,6 +121,10 @@ class AppointmentsRepository implements IAppointmentsRepository {
     return appointments;
   }
 
+  /*deleteFromClient(user_id: string): Promise<Appointment | undefined> {
+    throw new Error('Method not implemented.');
+  }*/
+
   public async create({
     cooperator_id,
     user_id,
@@ -138,6 +142,8 @@ class AppointmentsRepository implements IAppointmentsRepository {
 
     return appointment;
   }
+
+
 }
 
 export default AppointmentsRepository;
