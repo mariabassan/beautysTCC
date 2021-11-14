@@ -41,5 +41,16 @@ appointmentsRouter.get('/:cooperator_id',
   providerAppointmentsController.index
 );
 
+appointmentsRouter.delete(
+  '/me',
+  celebrate({
+    [Segments.BODY]: {
+      cooperator_id: Joi.string().uuid().required(),
+      date: Joi.date().required(),
+    },
+  }),
+  appointmentsController.delete,
+);
+
 
 export default appointmentsRouter;

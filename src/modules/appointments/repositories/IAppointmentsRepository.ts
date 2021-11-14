@@ -23,5 +23,6 @@ export default interface IAppointmentsRepository {
   findAllAppointments(
     data: IFindAllAppointmentsDTO,
   ): Promise<Appointment[]>;
-  //deleteFromClient (data: IDeleteAppointmentFromClientDTO): Promise<Appointment>;
+  findAllFromClient (data: IDeleteAppointmentFromClientDTO): Promise<Appointment | undefined>;
+  save(data: Appointment): Promise<Appointment>;
 }

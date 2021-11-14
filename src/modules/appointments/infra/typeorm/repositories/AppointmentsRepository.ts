@@ -6,6 +6,7 @@ import IFindAllInDayFromProviderDTO from '../../../dtos/IFindAllInDayFromProvide
 import IFindByDateDTO from '../../../dtos/IFindByDateDTO';
 import IFindAllInDayFromUserDTO from '../../../dtos/IFindAllInDayFromUserDTO';
 import IFindAllAppointmentsDTO from '../../../dtos/IFindAllAppointmentsDTO';
+import IDeleteAppointmentFromClientDTO from '../../../dtos/IDeleteAppointmentFromClientDTO';
 
 import IAppointmentsRepository from '../../../repositories/IAppointmentsRepository';
 
@@ -24,6 +25,16 @@ class AppointmentsRepository implements IAppointmentsRepository {
   }: IFindByDateDTO): Promise<Appointment | undefined> {
     const findAppointment = await this.ormRepository.findOne({
       where: { date, cooperator_id },
+    });
+    return findAppointment;
+  }
+
+  public async findAllFromClient({
+    date,
+    user_id,
+  }: IDeleteAppointmentFromClientDTO): Promise<Appointment | undefined> {
+    const findAppointment = await this.ormRepository.findOne({
+      where: { date, user_id },
     });
     return findAppointment;
   }
@@ -121,9 +132,9 @@ class AppointmentsRepository implements IAppointmentsRepository {
     return appointments;
   }
 
-  /*deleteFromClient(user_id: string): Promise<Appointment | undefined> {
-    throw new Error('Method not implemented.');
-  }*/
+  public async save(appointment: Appointment): Promise<Appointment> {
+    return this.ormRepository.save(appointment);
+  }
 
   public async create({
     cooperator_id,

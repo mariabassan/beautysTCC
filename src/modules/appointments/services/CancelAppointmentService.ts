@@ -1,65 +1,71 @@
-import { isBefore, subHours } from 'date-fns';
+import { isBefore, subHours, format} from 'date-fns';
+import { injectable, inject } from 'tsyringe';
+//import path from 'path';
 
-/*import User from '../models/User';
-import Appointment from '../models/Appointment';
-import Queue from '../../lib/Queue';
-import Cache from '../../lib/Cache';
-import CancellationMail from '../jobs/CancellationMail';*/
 import AppError from '../../../shared/errors/AppError';
 
 import Appointment from '../infra/typeorm/entities/Appointment';
 import IAppoitmentsRepository from '../repositories/IAppointmentsRepository';
 import ICacheProvider from '../../../shared/container/providers/CacheProvider/models/ICacheProvider';
+import INotificationsRepository from '../../../modules/notifications/repositories/INotificationsRepository';
+import IMailProvider from '../../../shared/container/providers/MailProvider/models/IMailProvider';
 
 interface IRequest {
   cooperator_id: string;
   user_id: string;
-  procedure_id: string;
   date: Date;
 }
 
+@injectable()
 class CancelAppointmentService {
-  async run({ provider_id, user_id }) {
-    const appointment = await Appointment.findByPk(provider_id, {
-      include: [
-        {
-          model: User,
-          as: 'provider',
-          attributes: ['name', 'email'],
-        },
-        {
-          model: User,
-          as: 'user',
-          attributes: ['name'],
-        },
-      ],
-    });
+  constructor(
+    @inject('AppointmentsRepository')
+    private appointmentsRepository: IAppoitmentsRepository,
 
-    if (appointment.user_id !== user_id) {
-      throw new Error("You don't have permission to cancel this appointment.");
+    @inject('NotificationsRepository')
+    private notificationsRepository: INotificationsRepository,
+
+    @inject('CacheProvider')
+    private cacheProvider: ICacheProvider,
+
+    /*@inject('MailProvider')
+    private mailProvider: IMailProvider,*/
+  ) {}
+
+  public async run({ 
+    cooperator_id,
+    user_id,
+    date,
+  }: IRequest): Promise<Appointment>{
+
+    const appointment = await this.appointmentsRepository.findAllFromClient(
+      {
+        user_id,
+        date,
+      },
+    ); 
+
+    const appointmentDate = subHours(appointment!.date, 24);
+
+    if (isBefore(appointmentDate, new Date())) {
+      throw new AppError('Só é possível cancelar agendamentos com 24 horas de antecedência.');
     }
 
-    const dateWithSub = subHours(appointment.date, 2);
+    appointment!.canceled_at = new Date();
 
-    if (isBefore(dateWithSub, new Date())) {
-      throw new Error('You can only cancel appointments 2 hours in advance.');
-    }
+    await this.appointmentsRepository.save(appointment!);
 
-    appointment.canceled_at = new Date();
+    const dateFormated = format(appointmentDate, "dd/MM/yyyy 'às' HH:mm'h'");
 
-    await appointment.save();
-
-    await Queue.add(CancellationMail.key, {
-      appointment,
+    await this.notificationsRepository.create({
+      recipient_id: user_id,
+      content: `Foi cancelado o agendamento com o ${cooperator_id} para o dia ${dateFormated}.`,
     });
 
-    /**
-     * Invalidate cache
-     */
-    await Cache.invalidatePrefix(`user:${user_id}:appointments`);
+    await this.cacheProvider.invalidate(`user:${user_id}:appointments`);
 
-    return appointment;
+    return appointment!;
   }
 }
 
-export default new CancelAppointmentService();
+export default CancelAppointmentService;

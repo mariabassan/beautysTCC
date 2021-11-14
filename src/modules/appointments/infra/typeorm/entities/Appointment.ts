@@ -46,6 +46,9 @@ class Appointment {
   @ManyToOne(() => Procedure)
   @JoinColumn({ name: 'procedure_id' })
   procedure: Procedure;
+
+  @CreateDateColumn()
+  canceled_at: Date;
 }
 
 export default Appointment;

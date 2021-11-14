@@ -15,9 +15,7 @@ class CooperatorRepository implements ICooperatorRepository {
   constructor() {
     this.ormRepository = getRepository(Cooperator);
   }
-  /*findByCNPJ(cnpj: string): Promise<Establishment | undefined> {
-    throw new Error('Method not implemented.');
-  }*/
+  
   public async findAllCooperator({
     cooperator_id,
   }: IFindAllCooperatorDTO): Promise<Cooperator[]> {
