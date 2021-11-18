@@ -1,17 +1,17 @@
-import path from 'path';
+import { resolve } from 'path';
 import crypto from 'crypto';
-import multer, { StorageEngine } from 'multer';
+import multer from 'multer';
 
-const tmpFolder = path.resolve(__dirname, '..', '..', 'tmp');
+const tmpFolder = resolve(__dirname, '..', '..', 'tmp');
 
 interface IUploadConfig {
-  driver: 's3' | 'disk';
+  driver: 'tmp' | 'disk';
 
   tmpFolder: string;
   uploadsFolder: string;
 
   multer: {
-    storage: StorageEngine;
+    storage: multer.StorageEngine;
   };
 
   config: {
@@ -26,12 +26,12 @@ export default {
   driver: process.env.STORAGE_DRIVER,
 
   tmpFolder,
-  uploadsFolder: path.resolve(tmpFolder, 'uploads'),
+  uploadsFolder: resolve(tmpFolder, 'uploads'),
 
   multer: {
     storage: multer.diskStorage({
       destination: tmpFolder,
-      filename: (request, file, callback) => {
+      filename(req, file, callback) {
         const fileHash = crypto.randomBytes(10).toString('HEX');
         const fileName = `${fileHash}-${file.originalname}`;
 
@@ -42,8 +42,5 @@ export default {
 
   config: {
     disk: {},
-    aws: {
-      bucket: 'tcc-beautyscheduler',
-    },
   },
 } as IUploadConfig;
