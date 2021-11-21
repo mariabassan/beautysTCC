@@ -6,6 +6,7 @@ import IFindAllInDayFromProviderDTO from '../dtos/IFindAllInDayFromProviderDTO';
 import IFindByDateDTO from '../dtos/IFindByDateDTO';
 import IFindAllInDayFromUserDTO from '../dtos/IFindAllInDayFromUserDTO';
 import IFindAllAppointmentsDTO from '../dtos/IFindAllAppointmentsDTO';
+import IFindAllUserAppointmentsDTO from '../dtos/IFindAllUserAppointmentsDTO';
 import IDeleteAppointmentFromClientDTO from '../dtos/IDeleteAppointmentFromClientDTO';
 
 export default interface IAppointmentsRepository {
@@ -22,6 +23,9 @@ export default interface IAppointmentsRepository {
   ): Promise<Appointment[]>;
   findAllAppointments(
     data: IFindAllAppointmentsDTO,
+  ): Promise<Appointment[]>;
+  findAllUserAppointments(
+    data: IFindAllUserAppointmentsDTO,
   ): Promise<Appointment[]>;
   findAllFromClient (data: IDeleteAppointmentFromClientDTO): Promise<Appointment | undefined>;
   save(data: Appointment): Promise<Appointment>;

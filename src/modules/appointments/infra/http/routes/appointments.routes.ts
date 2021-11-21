@@ -5,6 +5,7 @@ import AppointmentsController from '../controllers/AppointmentsController';
 import ProviderAppointmentsController from '../controllers/ProviderAppointmentsController';
 import UserAppointmentsController from '../controllers/UserAppointmentsController';
 import ListAppointmentsController from '../controllers/ListAppointmentsController';
+import UserAllAppointmentsController from '../controllers/UserAllAppointmentsController';
 
 import ensureAuthenticade from '../../../../users/infra/http/middlewares/ensureAuthenticated';
 
@@ -13,6 +14,7 @@ const appointmentsController = new AppointmentsController();
 const providerAppointmentsController = new ProviderAppointmentsController();
 const userAppointmentsController = new UserAppointmentsController();
 const listAppointmentController = new ListAppointmentsController();
+const userAllAppointmentsController = new UserAllAppointmentsController();
 
 appointmentsRouter.use(ensureAuthenticade);
 
@@ -30,7 +32,9 @@ appointmentsRouter.post(
 );
 appointmentsRouter.get('/', listAppointmentController.index);
 
-appointmentsRouter.get('/me', userAppointmentsController.index);
+appointmentsRouter.get('/me/day', userAppointmentsController.index);
+
+appointmentsRouter.get('/me', userAllAppointmentsController.index);
 
 appointmentsRouter.get('/:cooperator_id', 
   celebrate({

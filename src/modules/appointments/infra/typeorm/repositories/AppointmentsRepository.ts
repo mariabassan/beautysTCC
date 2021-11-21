@@ -6,6 +6,7 @@ import IFindAllInDayFromProviderDTO from '../../../dtos/IFindAllInDayFromProvide
 import IFindByDateDTO from '../../../dtos/IFindByDateDTO';
 import IFindAllInDayFromUserDTO from '../../../dtos/IFindAllInDayFromUserDTO';
 import IFindAllAppointmentsDTO from '../../../dtos/IFindAllAppointmentsDTO';
+import IFindAllUserAppointmentsDTO from '../../../dtos/IFindAllUserAppointmentsDTO';
 import IDeleteAppointmentFromClientDTO from '../../../dtos/IDeleteAppointmentFromClientDTO';
 
 import IAppointmentsRepository from '../../../repositories/IAppointmentsRepository';
@@ -76,7 +77,7 @@ class AppointmentsRepository implements IAppointmentsRepository {
             `to_char(${dateFieldName}, 'DD-MM-YYYY') = '${parsedDay}-${parsedMonth}-${year}'`,
         ),
       },
-      //relations: ['user'],
+      relations: ['user'],
     });
 
     return appointments;
@@ -99,7 +100,7 @@ class AppointmentsRepository implements IAppointmentsRepository {
             `to_char(${dateFieldName}, 'DD-MM-YYYY') = '${parsedDay}-${parsedMonth}-${year}'`,
         ),
       },
-      //relations: ['user'],
+      relations: ['user'],
     });
 
     return appointments;
@@ -124,10 +125,23 @@ class AppointmentsRepository implements IAppointmentsRepository {
               `to_char(${dateFieldName}, 'DD-MM-YYYY') = '${parsedDay}-${parsedMonth}-${year}'`,
           ),
         },
+        relations: ['user'],
       });
     } else {
       appointments = await this.ormRepository.find();
     }
+
+    return appointments;
+  }
+
+  public async findAllUserAppointments({
+    user_id,
+  }: IFindAllUserAppointmentsDTO): Promise<Appointment[]> {
+
+    const appointments = await this.ormRepository.find({
+      where: { user_id },
+      relations: ['user'],
+    });
 
     return appointments;
   }

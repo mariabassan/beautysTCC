@@ -9,6 +9,7 @@ import {
 } from 'typeorm';
 
 import User from '../../../../users/infra/typeorm/entities/User';
+import User_client from '../../../../user_client/infra/typeorm/entities/User_client';
 import Cooperator from '../../../../cooperator/infra/typeorm/entities/Cooperator';
 import Procedure from '../../../../procedure/infra/typeorm/entities/Procedure';
 
@@ -27,9 +28,9 @@ class Appointment {
   @Column()
   user_id: string;
 
-  @ManyToOne(() => User)
+  @ManyToOne(() => User_client)
   @JoinColumn({ name: 'user_id' })
-  user: User;
+  user: User_client;
 
   @Column('timestamp with time zone')
   date: Date;
