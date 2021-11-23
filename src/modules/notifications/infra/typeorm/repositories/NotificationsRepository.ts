@@ -16,8 +16,8 @@ class NotificationsRepository implements INotificationsRepository {
     content,
   }: ICreateNotificationDTO): Promise<Notification> {
     const notification = this.ormRepository.create({
-      recipient_id,
       content,
+      recipient_id,
     });
 
     await this.ormRepository.save(notification);

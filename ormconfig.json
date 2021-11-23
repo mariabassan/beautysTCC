@@ -23,12 +23,13 @@
   {
     "name": "mongo",
     "type": "mongodb",
-    "host": "localhost",
-    "port": 27017,
-    "database": "TCCbeautyscheduler",
+    "url": "mongodb+srv://Duda:M4ri4eduarda@beautyscheduler.dohnc.mongodb.net/TCCbeautyscheduler?retryWrites=true&w=majority",
+    "useNewUrlParser": true,
+    "synchronize": true,
+    "logging": true,
     "useUnifiedTopology": true,
     "entities": [
-      "./src/modules/notifications/infra/typeorm/schemas/Notification.ts"
+      "./src/modules/**/infra/typeorm/schemas/*.ts"
     ]
   }
 ]
