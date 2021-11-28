@@ -5,7 +5,7 @@ import ListCooperatorEstabService from '../../../services/ListCooperatorEstabSer
 
 export default class ListCooperatorEstabController {
   public async index(req: Request, res: Response): Promise<Response> {
-    const { cooperator_id, estab_cnpj } = req.params;
+    const { cooperator_id, estab_id } = req.params;
 
     const listCooperatorEstab = container.resolve(
       ListCooperatorEstabService,
@@ -13,7 +13,7 @@ export default class ListCooperatorEstabController {
 
     const cooperator = await listCooperatorEstab.execute({
       cooperator_id,
-      estab_cnpj
+      estab_id
     });
 
     return res.json(cooperator);
