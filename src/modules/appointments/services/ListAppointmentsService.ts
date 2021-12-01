@@ -30,6 +30,7 @@ class ListAppointmentsService {
     const appointments = await this.appointmentsRepository.findAllAppointments(
         {
           execept_user_id:user_id,
+          useradmin_id:user_id,
           day,
           month,
           year,

@@ -7,6 +7,7 @@ import CancelAppointmentService from '../../../services/CancelAppointmentService
 export default class AppointmentsController {
   public async create(req: any, res: Response): Promise<Response> {
     const user_id = req.user.id;
+    //const useradmin_id = req.user.id;
     const { cooperator_id, procedure_id, date } = req.body;
 
     const createAppointment = container.resolve(CreateAppointmentService);
