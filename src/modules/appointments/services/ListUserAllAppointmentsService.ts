@@ -34,6 +34,7 @@ class ListUserAllAppointmentsService {
       appointments = await this.appointmentsRepository.findAllUserAppointments(
         {
           user_id: user_id,
+          year,
         },
       );
 

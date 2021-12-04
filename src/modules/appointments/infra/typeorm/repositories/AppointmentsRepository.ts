@@ -150,6 +150,7 @@ class AppointmentsRepository implements IAppointmentsRepository {
 
   public async findAllUserAppointments({
     user_id,
+    year
   }: IFindAllInDayFromUserDTO): Promise<Appointment[]> {
 
     const appointments = await this.ormRepository.find({
@@ -157,7 +158,7 @@ class AppointmentsRepository implements IAppointmentsRepository {
         user_id,
         date: Raw(
           dateFieldName =>
-            `to_char() = ''`,
+            `to_char(${dateFieldName}, 'YYYY') = '${2021}'`,
         ),
       },
       relations: ['user'],
