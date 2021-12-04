@@ -7,6 +7,7 @@ import { classToClass } from 'class-transformer';
 
 interface IRequest {
   user_id: string;
+  year: number;
 }
 
 @injectable()
@@ -21,8 +22,9 @@ class ListUserAllAppointmentsService {
 
   public async execute({
     user_id,
+    year,
   }: IRequest): Promise<Appointment[]> {
-    const cacheKey = `provider-appointments:${user_id}`;
+    const cacheKey = `provider-appointments:${user_id}:${year}`;
 
     let appointments = await this.cacheProvider.recover<Appointment[]>(
       cacheKey,
@@ -31,7 +33,7 @@ class ListUserAllAppointmentsService {
     if (!appointments) {
       appointments = await this.appointmentsRepository.findAllUserAppointments(
         {
-          user_id,
+          user_id: user_id,
         },
       );
 
