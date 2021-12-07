@@ -134,32 +134,18 @@ class AppointmentsRepository implements IAppointmentsRepository {
     return appointments;
   }
 
-  /*public async findAllUserAppointments ({
+  public async findAllUserAppointments({
     user_id,
+    //year
   }: IFindAllUserAppointmentsDTO): Promise<Appointment[]> {
 
     const appointments = await this.ormRepository.find({
       where: {
         user_id,
-      },
-      relations: ['user'],
-    });
-
-    return appointments;
-  }*/
-
-  public async findAllUserAppointments({
-    user_id,
-    year
-  }: IFindAllInDayFromUserDTO): Promise<Appointment[]> {
-
-    const appointments = await this.ormRepository.find({
-      where: {
-        user_id,
-        date: Raw(
+        /*date: Raw(
           dateFieldName =>
             `to_char(${dateFieldName}, 'YYYY') = '${2021}'`,
-        ),
+        ),*/
       },
       relations: ['user'],
     });

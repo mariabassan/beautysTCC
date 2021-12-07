@@ -6,7 +6,7 @@ import ListUserAllAppointmentsService from '../../../services/ListUserAllAppoint
 export default class UserAllAppointmentsController {
   public async index(req: Request, res: Response): Promise<Response> {
     const user_id = req.user.id;
-    const { year } = req.query;
+    //const { year } = req.query;
 
     const listUserAllAppointments = container.resolve(
       ListUserAllAppointmentsService,
@@ -14,9 +14,9 @@ export default class UserAllAppointmentsController {
 
     const appointments = await listUserAllAppointments.execute({
       user_id,
-      year: Number(year),
     });
 
     return res.json(appointments);
   }
 }
+//year: Number(year),
