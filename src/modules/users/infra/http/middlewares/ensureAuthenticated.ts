@@ -11,7 +11,7 @@ interface ITokenPayload {
 }
 
 export default function ensureAuthenticated(
-  req: any,
+  req: Request,
   res: Response,
   next: NextFunction,
 ): void {
@@ -31,10 +31,6 @@ export default function ensureAuthenticated(
     req.user = {
       id: sub,
     };
-
-    /*req.cooperator = {
-      id: sub,
-    };*/
 
     return next();
   } catch {
